@@ -5,6 +5,7 @@
  vector<vector<int> > combination;
      vector<vector<int> > combinationSum(vector<int>& candidates, int target) {
         map<int,int> find;
+        map<int,int> check;
        
            sort(candidates.begin(),candidates.end());
         if(target<candidates[0]){
@@ -21,11 +22,13 @@
                 combination.push_back(p);
             }else if(candidates[i]<target){
                 int minus=target-candidates[i];
-                if(find[minus]){
+                cout<<check[candidates[i]]<<" "<<minus<<endl;
+                if(find[minus]&&(check[candidates[i]]!=minus)){
                     vector<int> p;
                     p.push_back(candidates[i]);
                     p.push_back(minus);
                     combination.push_back(p);
+                    check[minus]==candidates[i];
                 };
                 int count=2;
                 int sum=count*candidates[i];
