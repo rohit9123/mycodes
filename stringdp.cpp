@@ -1,39 +1,43 @@
 #include<iostream>
 #include<string.h>
 using namespace std;
-int c[15][18];
-int maximum(string s1,string s2,int l1,int l2,int m1,int m2){
-if(l1==m1||l2==m2){
-    return 0;
-}
+    int a[1001][1001];
+    int findlongest(string text1,string text2){
+        if(text1.size()==0||text2.size()==0){
+            return 0;
+        }
+        if(a[text1.size()][text2.size()]!=-1){
+            return a[text1.size()][text2.size()];
+        }
+        
+        if(text1[0]==text2[0]){
+            a[text1.size()][text2.size()] =1+findlongest(text1.substr(1),text2.substr(1));
+        }else{
+            a[text1.size()][text2.size()]=max(findlongest(text1.substr(1),text2),findlongest(text1,text2.substr(1)));
+        }
+        
+        return a[text1.size()][text2.size()];
+    }
+    
+    
+    int longestCommonSubsequence (string text1, string text2) {
+        
+         
+        for(int i=0;i<text1.length()+1;i++){
+            for(int j=0;j<text2.length()+1;j++){
+                a[i][j]=-1;
+            }
+        }
+        int longest=findlongest(text1,text2);
+        return longest;
+    }
 
-if(c[l1][l2]!=-1){
-    return c[l1][l2];
-}
-
-if(s1[l1]==s2[l2]){
-    c[l1+1][l2+1]=maximum(s1,s2,l1+1,l2+1,m1,m2);
-    c[l1][l2]=1+c[l1+1][l2+1];
-}
-else{
-    c[l1+1][l2]=maximum(s1,s2,l1+1,l2,m1,m2);
-    c[l1][l2+1]=maximum(s1,s2,l1,l2+1,m1,m2);
-    c[l1][l2]=max(c[l1+1][l2],c[l1][l2+1]);
-}
-return c[l1][l2];
-
-
-
-}
 int main(){
     
     
-    string a="abcdgdkkckckc", b="hdhajfhjakckckkc";
+    string text1="fcvafurqjylclorwfoladwfqzkbebslwnmpmlkbezkxoncvwhstwzwpqxqtyxozkpgtgtsjobujezgrkvevklmludgtyrmjaxyputqbyxqvupojutsjwlwluzsbmvyxifqtglwvcnkfsfglwjwrmtyxmdgjifyjwrsnenuvsdedsbqdovwzsdghclcdexmtsbexwrszihcpibwpidixmpmxshwzmjgtadmtkxqfkrsdqjcrmxkbkfoncrcvoxuvcdytajgfwrcxivixanuzerebuzklyhezevonqdsrkzetsrgfgxibqpmfuxcrinetyzkvudghgrytsvwzkjulmhanankxqfihenuhmfsfkfepibkjmzybmlkzozmluvybyzsleludsxkpinizoraxonmhwtkfkhudizepyzijafqlepcbihofepmjqtgrsxorunshgpazovuhktatmlcfklafivivefyfubunszyvarcrkpsnglkduzaxqrerkvcnmrurkhkpargvcxefovwtapedaluhclmzynebczodwropwdenqxmrutuhehadyfspcpuxyzodifqdqzgbwhodcjonypyjwbwxepcpujerkrelunstebopkncdazexsbezmhynizsvarafwfmnclerafejgnizcbsrcvcnwrolofyzulcxaxqjqzunedidulspslebifinqrchyvapkzmzwbwjgbyrqhqpolwjijmzyduzerqnadapudmrazmzadstozytonuzarizszubkzkhenaxivytmjqjgvgzwpgxefatetoncjgjsdilmvgtgpgbibexwnexstipkjylalqnupexytkradwxmlmhsnmzuxcdkfkxyfgrmfqtajatgjctenqhkvyrgvapctqtyrufcdobibizihuhsrsterozotytubefutaxcjarknynetipehoduxyjstufwvkvwvwnuletybmrczgtmxctuny",
+     text2="nohgdazargvalupetizezqpklktojqtqdivcpsfgjopaxwbkvujilqbclehulatshehmjqhyfkpcfwxovajkvankjkvevgdovazmbgtqfwvejczsnmbchkdibstklkxarwjqbqxwvixavkhylqvghqpifijohudenozotejoxavkfkzcdqnoxydynavwdylwhatslyrwlejwdwrmpevmtwpahatwlaxmjmdgrebmfyngdcbmbgjcvqpcbadujkxaxujudmbejcrevuvcdobolcbstifedcvmngnqhudixgzktcdqngxmruhcxqxypwhahobudelivgvynefkjqdyvalmvudcdivmhghqrelurodwdsvuzmjixgdexonwjczghalsjopixsrwjixuzmjgxydqnipelgrivkzkxgjchibgnqbknstspujwdydszohqjsfuzstyjgnwhsrebmlwzkzijgnmnczmrehspihspyfedabotwvwxwpspypctizyhcxypqzctwlspszonsrmnyvmhsvqtkbyhmhwjmvazaviruzqxmbczaxmtqjexmdudypovkjklynktahupanujylylgrajozobsbwpwtohkfsxeverqxylwdwtojoxydepybavwhgdehafurqtcxqhuhkdwxkdojipolctcvcrsvczcxedglgrejerqdgrsvsxgjodajatsnixutihwpivihadqdotsvyrkxehodybapwlsjexixgponcxifijchejoxgxebmbclczqvkfuzgxsbshqvgfcraxytaxeviryhexmvqjybizivyjanwxmpojgxgbyhcruvqpafwjslkbohqlknkdqjixsfsdurgbsvclmrcrcnulinqvcdqhcvwdaxgvafwravunurqvizqtozuxinytafopmhchmxsxgfanetmdcjalmrolejidylkjktunqhkxchyjmpkvsfgnybsjedmzkrkhwryzan";
    
-    for(int i=0;i<a.length()+1;i++){
-        for(int j=0;j<b.length()+1;j++){
-            c[i][j]=-1;
-        }
-    }
-    cout<<maximum(a,b,0,0,a.length(),b.length());
+    int li=longestCommonSubsequence(text1,text2);
+    cout<<li<<endl;
 }
