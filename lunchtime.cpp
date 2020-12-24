@@ -42,7 +42,7 @@ void solve(){
       cout<<-1<<endl;
       return;
   }
-    int time=INT_MAX;
+    int time=INT64_MAX;
     for(int i=0;i<n-2;i++){
         lli temp=a[i]^a[i+1];
         if(temp>a[i+2]){
@@ -71,7 +71,7 @@ void solve(){
         return;
     }
 
-if(time==INT_MAX)
+if(time==INT64_MAX)
 cout<<-1<<endl;
 
 else
